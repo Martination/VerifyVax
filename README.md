@@ -1,70 +1,39 @@
-# Health Cards Tests
+# SMART Health Card Demo Service
 
-## Using the hosted demo components
+This project demonstrates the issuance and validation of cards specified in the [SMART Health Card Framework](https://spec.smarthealth.cards/).
 
-### Mobile Wallet demo at <https://c19.cards>
+# Live Demo
 
-- Click "Connect to Lab and get tested" to retrieve a VC
-- Review details (URLs, DIDs, keys, etc) in Dev Tools
-- Menu > "Scan QR Code" to share your VC with a verifier (e.g., the Verifier demo below)
+* https://demo-portals.smarthealth.cards/VerifierPortal.html
+* https://demo-portals.smarthealth.cards/DevPortal.html
 
-### Verifier demo at <https://c19.cards/venue>
+# Development
 
-- OpenID Request QR code is displayed automatically
-- Review details (URLs, DIDs, keys, etc) in Dev Tools
-- Scan the barcode from your Mobile Wallet to share your VC (e.g., the Mobile Wallet demo above)
+## Setup
 
-### Lab demo at <https://c19.cards/api/fhir>
+1. Make sure [node.js](https://nodejs.org/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) are installed on your system; the latest Long-Term Support (LTS) version is recommended for both.
 
-- Connect your own Mobile Wallet to this demo lab interface
-- Supports SMART on FHIR discovery protocol (<https://c19.cards/api/fhir/.well-known/smart-configuration>)
-- No UI provided -- just an automatic "sign-in" workflow that redirects back to your Mobile Wallet
+2. Get the source, for example using git:
 
-## Run locally in dev, with node and parcel watchers
+                git clone -b sample-service https://github.com/microsoft/health-cards-tests
+                cd health-cards-tests/demo
 
-This demo should work with Node.js 15 (current LTS) as well as Node.js 13. See `Dockerfile` for details if you want to build/develop locally using docker; otherwise, you can get started with:
+3. Build the npm package:
 
-    git clone https://github.com/smart-on-fhir/health-cards-tests
-    cd health-cards-tests
+                npm install
+                npm run build
 
-    # In first terminal
-    export SERVER_BASE=http://localhost:8080/api
-    npm run dev-ui # Terminal 1
+4. Deploy the demo service (edit `src/config.ts` to change configuration):
 
-    # In second terminal
-    export SERVER_BASE=http://localhost:8080/api
-    npm run dev    # Terminal 2
+                npm run deploy
 
-## Build and run locally (no watchers)
 
-    npm run build-ui
-    npm run build
+5. (Optionally) Deploy the service in a Docker container:
 
-    export SERVER_BASE=http://localhost:8080/api
-    npm run dev
+        docker build -t health-wallet-demo-portals .
+        docker run --rm -it -p 8080:8080 health-wallet-demo-portals
 
-## Run locally in Docker
 
-    docker build -t health-wallet-demo .
-    docker run --rm -it --env SERVER_BASE=http://localhost:8080/api -p 8080:8080 health-wallet-demo
-
-## Run dev-only containers with watchers in Docker-Compose
-
-    export USER=$(id -u)
-    docker-compose --env-file ./compose.env up
-
-You can use the docker-compose.yaml file to spin up two dev containers with watchers, one for the UI and one for the server.
-
-### Note the following
-
-1. Both containers have their `src` directories bind-mounted to the local directory's `src` folder. Any changes made in the `dev` container (or the host) will propagate to both containers + host and be registered by the watchers. This is helpful since you can, for instance, launch programs inside the `dev` container and utilize dev dependencies without needing to ever install them locally.
-2. Both containers have their `dist` folders mounted to a named volume. This means the parcel watcher in the `dev-ui` container can write changes that are accessible by the `dev` container. Note the `dev-ui` container needs `root` privileges for this. See this [issue](https://github.com/moby/moby/issues/2259) for details.
-3. The `dev-ui` container has `root` privileges, but it has been given read-only access to the `src` folder. Any changes to `src` made from within this container will not be seen by the host or `dev` container.
-
-## Testing endpoints
-
-See [testing-endpoints.md](./testing-endpoints.md) for details.
-
-## Test portals
-
-The `demo` folder constains a project for test portals illustrating the issuance and validation of SMART Health Cards; see its [README.md](demo/README.md) for details.
+    The demo stands up an endpoint illustrating the SMART Health Card operations listening on port 8080:
+    - [developer](https://localhost:8080/DevPortal.html) portal for constructing SMART Health Cards from FHIR data.
+    - [verifier](https://localhost:8080/VerifierPortal.html) for validating SMART Health Cards and extracting embedded FHIR data.

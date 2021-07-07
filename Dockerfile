@@ -1,17 +1,18 @@
-FROM node:13
+FROM node:15
 
-ENV SERVER_BASE=relative
+ENV HOST_PORT=8080
+ENV SERVER_BASE=http://localhost:8080/
+
 WORKDIR /usr/src/app
 
-COPY package.json package-lock.json ./
-RUN npm ci
-
+COPY package.json ./
 COPY src/ ./src
-COPY dist ./dist
-COPY tslint.json tsconfig.json ./
-RUN npm run build-ui
+COPY public/ ./public
+COPY private/ ./private
+COPY tsconfig.json ./
+
+RUN npm install
 RUN npm run build
 
 # Start
-CMD [ "npm", "run", "dev" ]
-EXPOSE 8080
+CMD [ "npm", "run", "deploy" ]
