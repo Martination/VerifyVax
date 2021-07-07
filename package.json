@@ -8,7 +8,8 @@
         "npm": "7.x"
     },
     "scripts": {
-        "build": "tsc",
+        "tsc": "tsc",
+        "build": "npm run tsc",
         "deploy": "ts-node --files src/server.ts",
         "start": "ts-node --files src/server.ts",
         "node": "node js/src/server.js",
