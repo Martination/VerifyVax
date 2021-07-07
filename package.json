@@ -1,7 +1,7 @@
 {
-    "name": "shc-demo",
-    "version": "0.1.0-alpha",
-    "description": "SMART Health Cards Demo",
+    "name": "verifyvax",
+    "version": "0.2.0",
+    "description": "Verify vax status using SMART Health Cards for Covid-19",
     "main": "src/server.ts",
     "engines": {
         "node": "15.x",
@@ -11,6 +11,7 @@
         "build": "tsc",
         "deploy": "ts-node --files src/server.ts",
         "start": "ts-node --files src/server.ts",
+        "node": "node js/src/server.js",
         "postinstall": "node src/init.js",
         "build-docs": "ts-node --files src/buildDocs.ts"
     },
@@ -26,7 +27,6 @@
         "github-markdown-css": "^4.0.0",
         "got": "^11.8.2",
         "health-cards-validation-sdk": "git+https://github.com/smart-on-fhir/health-cards-validation-SDK.git#v1.0.0-4",
-        "jspdf": "^2.3.1",
         "jsqr": "^1.4.0",
         "node-jose": "^2.0.0",
         "pako": "^2.0.3",
