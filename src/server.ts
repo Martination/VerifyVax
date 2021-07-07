@@ -8,6 +8,7 @@
 import express from 'express';
 import { Config } from './config';
 import http from 'http';
+import https from 'https';
 import got from 'got';
 import { validate, ValidationProfiles } from 'health-cards-validation-sdk/js/src/api';
 import * as issuer from './issuer';
@@ -106,8 +107,20 @@ app.post(Config.DOWNLOAD_PUBLIC_KEY, async (req, res) => {
 });
 
 
-http.createServer(app).listen(Config.SERVICE_PORT, () => {
+app.listen(Config.SERVICE_PORT, () => {
     const url = Config.SERVER_BASE;
     console.log("Service listening at " + url);
     // console.log("VerifierPortal:  " + url + 'VerifierPortal.html');
 });
+
+// http.createServer(app).listen(Config.SERVICE_PORT, () => {
+//     const url = Config.SERVER_BASE;
+//     console.log("Service listening at " + url);
+//     // console.log("VerifierPortal:  " + url + 'VerifierPortal.html');
+// });
+
+// https.createServer(app).listen(Config.SERVICE_PORT, () => {
+//     const url = Config.SERVER_BASE;
+//     console.log("HTTPS Service listening at " + url);
+//     // console.log("VerifierPortal:  " + url + 'VerifierPortal.html');
+// });
