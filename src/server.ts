@@ -109,7 +109,7 @@ app.post(Config.DOWNLOAD_PUBLIC_KEY, async (req, res) => {
 
 app.listen(Config.SERVICE_PORT, () => {
     const url = Config.SERVER_BASE;
-    console.log("Service listening at " + url);
+    console.log("Service listening at " + url + " " + Config.SERVICE_PORT);
     // console.log("VerifierPortal:  " + url + 'VerifierPortal.html');
 });
 
