@@ -4,12 +4,13 @@
     "description": "SMART Health Cards Demo",
     "main": "src/server.ts",
     "engines": {
-        "node": "15.x"
+        "node": "15.x",
+        "npm": "7.x"
     },
     "scripts": {
         "build": "tsc",
         "deploy": "ts-node --files src/server.ts",
-        "issue": "ts-node src/cli.ts --task issue",
+        "start": "ts-node --files src/server.ts",
         "postinstall": "node src/init.js",
         "build-docs": "ts-node --files src/buildDocs.ts"
     },
