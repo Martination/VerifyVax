@@ -3,6 +3,9 @@
     "version": "0.1.0-alpha",
     "description": "SMART Health Cards Demo",
     "main": "src/server.ts",
+    "engines": {
+        "node": "15.x"
+    },
     "scripts": {
         "build": "tsc",
         "deploy": "ts-node --files src/server.ts",
