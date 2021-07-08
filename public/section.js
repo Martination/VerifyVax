@@ -15,7 +15,7 @@ class Field {
     name;
     errors = [];
     height = { min: 60, max: 400 };
-    options = { color: { default: "#FFF", update: '#d6fcd7' }, delay: { update: 50, bounce: 50 } };
+    options = { color: { default: "#FFF", update: '#d6fcd7' }, delay: { update: 100, bounce: 100 } };
 
     constructor(section, name, placeholder) {
 
@@ -31,6 +31,10 @@ class Field {
         let timer;
 
         this.textArea.addEventListener('input', () => {
+
+            // console.log("Input changed");
+            document.getElementById('summaryWorking').value = "Processing";
+            window.validateCode('summaryWorking');
 
             // this will prevent typing from triggering a server round-trip for every key-stroke
             if (timer) clearTimeout(timer);
@@ -332,7 +336,7 @@ class Section {
     //
     resetTextFields() {
         for (let i = 1; i < this.fields.length;) {
-            this.fields[1].delete();
+            this.fields[1].delete();        // I think this needs to be [i] not [1]?
         }
     }
 
@@ -365,6 +369,9 @@ class Section {
         this.clearErrors();
         this.fields.forEach(f => f.value = undefined);
         if (this.next) this.next.clear();
+        else clearDataExtract();
+        // else { console.log("Clearing data"); clearDataExtract(); }
+        // This is called twice before processing begins each time, for some reason
     }
 
 

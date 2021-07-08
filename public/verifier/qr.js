@@ -34,9 +34,9 @@ const secScanQr = (() => {
     //
     sec.getValue = function () {
 
-        console.log("Got a pasted QR code ln:37");
-        document.getElementById('summaryWorking').value = "Processing";
-        window.validateCode('summaryWorking');
+        // console.log("Got a pasted QR code ln:37");
+        // document.getElementById('summaryWorking').value = "Processing";
+        // window.validateCode('summaryWorking');
 
         const orderedParts = hasAllParts(this);
         if (orderedParts) {
@@ -64,11 +64,14 @@ const secScanQr = (() => {
         const qrModal = bootstrap.Modal.getInstance(qrModalEl);
 
         qrModal.show();
-        // const qrScanDiv = document.getElementById('CenterDIV');         // ~~~~~~~~~~~~~~~~~~
+        // const qrScanDiv = document.getElementById('CenterDIV');
         // qrScanDiv.style.display = 'block';
         const multiLabel = document.getElementById('multipart');
         multiLabel.innerHTML = ''; // may be dirty from previous scans
         let scannedParts = [];
+
+        // console.log("Open Scanner");
+        // clearDataExtract();
 
         while (true) {
 
