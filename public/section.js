@@ -15,7 +15,7 @@ class Field {
     name;
     errors = [];
     height = { min: 60, max: 400 };
-    options = { color: { default: "#FFF", update: '#d6fcd7' }, delay: { update: 100, bounce: 100 } };
+    options = { color: { default: "#FFF", update: '#d6fcd7' }, delay: { update: 50, bounce: 50 } };
 
     constructor(section, name, placeholder) {
 

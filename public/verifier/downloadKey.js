@@ -1,3 +1,8 @@
+// let CAcovidKey;
+// fetch('./CACovidKey.json')
+//     .then(res => { return res.json(); })
+//     .then(data => CAcovidKey = JSON.stringify(data, null, 2));
+
 const secDownloadKey = (() => {
 
     const sec = new Section('downloadKey', "Download Issuer Public Key");
@@ -11,12 +16,23 @@ const secDownloadKey = (() => {
 
         if (!publicKeyUrl) return;
 
-        const url = 'download-public-key';
-        let result = await restCall(url, { keyUrl: publicKeyUrl }, 'POST');
+        const CAcovidKeyUrl = 'https://myvaccinerecord.cdph.ca.gov/creds/.well-known/jwks.json';
 
-        sec.setErrors(result.error);
+        if (publicKeyUrl === CAcovidKeyUrl) {
+            fetch('./CACovidKey.json')
+                .then(res => { return res.json(); })
+                .then(data => sec.setValue(JSON.stringify(data, null, 2)));
+            //  .then(data => CAcovidKey = JSON.stringify(data, null, 2))
+            //  .then(sec.setValue(CAcovidKey))
 
-        await sec.setValue(JSON.stringify(result.keySet, null, 2));
+            // await sec.setValue(CAcovidKey);
+        } else {
+            const url = 'download-public-key';
+            let result = await restCall(url, { keyUrl: publicKeyUrl }, 'POST');
+
+            sec.setErrors(result.error);
+            await sec.setValue(JSON.stringify(result.keySet, null, 2));
+        }
 
     };
 
