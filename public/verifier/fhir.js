@@ -23,6 +23,9 @@ const secExtractFhirBundle = (() => {
         document.getElementById('summaryDetails').value = fhirBundle;
         window.validateCode('summaryDetails');
 
+        document.getElementById('summaryWorking').value = "Done";
+        window.validateCode('summaryWorking');
+
     };
 
     sec.validate = async function (field) {

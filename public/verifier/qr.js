@@ -9,6 +9,12 @@ const secScanQr = (() => {
         this.clear();
         const scannedParts = await scanQrCodes();
 
+        console.log("Got a QR Code? ln:12");
+        console.log(scannedParts);
+
+        document.getElementById('summaryWorking').value = "Processing";
+        window.validateCode('summaryWorking');
+
         // for multi-part qrs add additional TAs with 'input' listeners
         for (let i = 0; i < scannedParts.length; i++) {
             i > 0 && sec.addTextField(`Multipart QR ${i + 1}`);
@@ -27,6 +33,11 @@ const secScanQr = (() => {
     // override the getValue function to return combined numeric data
     //
     sec.getValue = function () {
+
+        console.log("Got a pasted QR code ln:37");
+        document.getElementById('summaryWorking').value = "Processing";
+        window.validateCode('summaryWorking');
+
         const orderedParts = hasAllParts(this);
         if (orderedParts) {
             const reducer = (numericString, part) => numericString + part.data;

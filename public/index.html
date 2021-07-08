@@ -71,6 +71,7 @@
 
                 <hr><br />
                 <div id="summary">
+                    <div><span id="summaryWorking"></span>&nbsp;</div>
                     <div>Verified real? <strong><span id="summaryVerify"></span></strong></div>
                     <div>Issued by: <span id="summaryIss"></span></div><br />
                     <div>Personal Details <span id="summaryDetails"></span></div>
@@ -153,11 +154,13 @@
 
 
         function validateCode(elementId) {
-            const summaryElements = ["summaryVerify", "summaryIss", "summaryDetails"];
             let element = document.getElementById(elementId);
             console.log(element.value);
 
-            if (elementId === "summaryVerify") {
+            if (elementId === "summaryWorking") {
+                element.innerHTML = element.value.toString();
+
+            } else if (elementId === "summaryVerify") {
                 element.innerHTML = element.value.toString().toUpperCase();
 
             } else if (elementId === "summaryIss") {
@@ -189,7 +192,7 @@
         }
 
         function clearDataExtract() {
-            const summaryElements = ["summaryVerify", "summaryIss", "summaryDetails"];
+            const summaryElements = ["summaryWorking", "summaryVerify", "summaryIss", "summaryDetails"];
 
             for (let elementId of summaryElements) {
                 let element = document.getElementById(elementId);
