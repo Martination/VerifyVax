@@ -1,6 +1,6 @@
 {
     "name": "verifyvax",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "Verify vax status using SMART Health Cards for Covid-19",
     "main": "src/server.ts",
     "engines": {
@@ -8,7 +8,7 @@
     },
     "scripts": {
         "tsc": "tsc",
-        "build": "echo Running tsc build && npm run tsc",
+        "build": "npm run tsc",
         "postinstall": "node src/init.js",
         "node": "node js/src/server.js",
         "deploy-orig": "ts-node --files src/server.ts",

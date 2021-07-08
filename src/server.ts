@@ -24,7 +24,8 @@ validate.profile = ValidationProfiles.any;
 
 
 app.post(Config.VALIDATE_FHIR_BUNDLE, async (req, res) => {
-    console.log('Received POST for', Config.VALIDATE_FHIR_BUNDLE, req.body);
+    console.log('Received POST for', Config.VALIDATE_FHIR_BUNDLE);
+    // console.log('Received POST for', Config.VALIDATE_FHIR_BUNDLE, req.body);
     const fhir = req.body.data;
     validate.profile = ValidationProfiles[fhir.profile || 'any'];
     const errors = await validate.fhirbundle(fhir.data);
@@ -35,7 +36,8 @@ app.post(Config.VALIDATE_FHIR_BUNDLE, async (req, res) => {
 
 
 app.post(Config.VALIDATE_QR_NUMERIC, async (req, res) => {
-    console.log('Received POST for', Config.VALIDATE_QR_NUMERIC, req.body);
+    console.log('Received POST for', Config.VALIDATE_QR_NUMERIC);
+    // console.log('Received POST for', Config.VALIDATE_QR_NUMERIC, req.body);
     const shc = req.body.data;
     const errors = await validate.qrnumeric(shc);
     res.type('json');
@@ -44,7 +46,9 @@ app.post(Config.VALIDATE_QR_NUMERIC, async (req, res) => {
 
 
 app.post(Config.VALIDATE_JWS, async (req, res) => {
+    console.log('VALIDATE JWS');    // I'm not sure if this route is still used
     console.log('Received POST for', Config.VALIDATE_JWS, req.body);
+    // console.log('Received POST for', Config.VALIDATE_JWS, req.body);
     const jws = req.body.data;
     const errors = await validate.jws(jws);
     res.type('json');
@@ -54,6 +58,7 @@ app.post(Config.VALIDATE_JWS, async (req, res) => {
 
 app.post(Config.VALIDATE_PAYLOAD, async (req, res) => {
     console.log('Received POST for', Config.VALIDATE_PAYLOAD, req.body);
+    // console.log('VALIDATE PAYLOAD');
     const payload = req.body.data;
     const errors = await validate.jwspayload(payload);
     res.type('json');
@@ -62,7 +67,8 @@ app.post(Config.VALIDATE_PAYLOAD, async (req, res) => {
 
 
 app.post(Config.VALIDATE_KEYSET, async (req, res) => {
-    console.log('Received POST for', Config.VALIDATE_KEYSET, req.body);
+    console.log('Received POST for', Config.VALIDATE_KEYSET);
+    // console.log('Received POST for', Config.VALIDATE_KEYSET, req.body);
     const keyset = req.body.data;
     const errors = await validate.keyset(keyset);
     res.type('json');
@@ -71,7 +77,8 @@ app.post(Config.VALIDATE_KEYSET, async (req, res) => {
 
 
 app.post(Config.INFLATE_PAYLOAD, async (req, res) => {
-    console.log('Received POST for', Config.INFLATE_PAYLOAD, req.body);
+    console.log('Received POST for', Config.INFLATE_PAYLOAD);
+    // console.log('Received POST for', Config.INFLATE_PAYLOAD, req.body);
     const payload = JSON.stringify(req.body.payload);
     const result = issuer.inflate(payload);
     res.send(result);
@@ -80,7 +87,8 @@ app.post(Config.INFLATE_PAYLOAD, async (req, res) => {
 
 app.post(Config.DOWNLOAD_PUBLIC_KEY, async (req, res) => {
 
-    console.log('Received POST for', Config.DOWNLOAD_PUBLIC_KEY, req.body);
+    console.log('Received POST for', Config.DOWNLOAD_PUBLIC_KEY);
+    // console.log('Received POST for', Config.DOWNLOAD_PUBLIC_KEY, req.body);
 
     const publicKeyUrl = req.body.keyUrl;
 
