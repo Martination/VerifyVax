@@ -28,10 +28,6 @@ const secVerifySignature = (() => {
 
         if (!key) return;
 
-        // console.log(data)
-        // console.log(key)
-        // console.log(signature)
-
         await window.crypto.subtle.importKey("jwk", key, { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"])
             .then(
                 function (publicKey) {
@@ -46,9 +42,8 @@ const secVerifySignature = (() => {
                 async function (validationResult) {
                     validationResult ? sec.clearErrors() : sec.setErrors(["Signature Verification Failed"]);
 
-                    // document.getElementById('verificationDataExtract').innerHTML = validationResult.toString();
-                    document.getElementById('verificationDataExtract').value = validationResult;
-                    window.validateCode('verificationDataExtract');
+                    document.getElementById('summaryVerify').value = validationResult;
+                    window.validateCode('summaryVerify');
 
                     await sec.setValue(validationResult.toString());
                 },

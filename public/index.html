@@ -78,11 +78,10 @@
 
             </div>
             <br />
+            <div class="footer">
+                <input type="button" id='buttonClear' value="Clear" />
+            </div>
             <hr><br />
-
-            <div id="fhirDataExtract"></div>
-            <div id="verificationDataExtract"></div>
-            <div id="keyDataExtract"></div>
 
             <div id="scanQr" class="section"></div>
             <script src='verifier/qr.js'></script>
@@ -123,22 +122,15 @@
     </div>
 
 
-    <div class="footer">
-        <input type="button" id='buttonClear' value="Clear" />
-    </div>
-
 
     <div id="CenterDIV">
-
         <div class="divFloat" style="text-align: center;">
-
             <div id="container" style="position:relative;">
                 <video id='vid'></video>
                 <label id='multipart' style="position:absolute; top: 10px; left: 10px"></label>
             </div>
 
             <input type="button" id='buttonCloseVideo' value="Close" />
-
         </div>
     </div>
 
@@ -161,40 +153,48 @@
 
 
         function validateCode(elementId) {
+            const summaryElements = ["summaryVerify", "summaryIss", "summaryDetails"];
             let element = document.getElementById(elementId);
             console.log(element.value);
 
-            if (elementId === "verificationDataExtract") {
-                let summaryVerify = document.getElementById("summaryVerify");
-                summaryVerify.innerHTML = element.value.toString().toUpperCase();
+            if (elementId === "summaryVerify") {
+                element.innerHTML = element.value.toString().toUpperCase();
 
-            } else if (elementId === "keyDataExtract") {
-                let summaryIss = document.getElementById("summaryIss");
-                summaryIss.innerHTML = element.value.toString();
+            } else if (elementId === "summaryIss") {
+                element.innerHTML = element.value.toString();
 
-            } else if (elementId === "fhirDataExtract") {
-                let summaryDetails = document.getElementById("summaryDetails");
+            } else if (elementId === "summaryDetails") {
                 let fhir = element.value;
 
-                let fhirData = toHealthCardData(fhir);
-                // console.log(fhirData);
-                summaryDetails.innerHTML = JSON.stringify(fhirData);
+                if (fhir) {
+                    let fhirData = toHealthCardData(fhir);
 
-                let patientData = fhirData.patientData;
-                let name = `${patientData.firstName} ${patientData.lastName}`;
-                let dob = patientData.dob;
-                let immunizations = ""
+                    let patientData = fhirData.patientData;
+                    let name = `${patientData.firstName} ${patientData.lastName}`;
+                    let dob = patientData.dob;
+                    let issuer = fhirData.issuer;
 
-                patientData.immunizations.forEach(function (vaccine, index, arr) {
-                    // console.log(`Index: ${index}, Name: ${vaccine.code}`);
-                    immunizations += `<br>Shot ${index + 1}, Date: ${vaccine.date}, Code: ${codeToVaccine(vaccine.code)} ${vaccine.code}`;
-                });
+                    let immunizations = ""
+                    patientData.immunizations.forEach(function (vaccine, index, arr) {
+                        // console.log(`Index: ${index}, Name: ${vaccine.code}`);
+                        immunizations += `<br>Shot ${index + 1}, Date: ${vaccine.date}, Code: ${codeToVaccine(vaccine.code)} ${vaccine.code}`;
+                    });
 
-                let issuer = fhirData.issuer;
+                    let formattedString = `<br>Name: ${name}, DOB: ${dob}, ${immunizations} <br>From: ${issuer}`;
 
-                let formattedString = `<br>Name: ${name}, DOB: ${dob}, ${immunizations} <br>From: ${issuer}`;
+                    element.innerHTML = formattedString;
 
-                summaryDetails.innerHTML = formattedString;
+                } else { element.innerHTML = ""; }
+            }
+        }
+
+        function clearDataExtract() {
+            const summaryElements = ["summaryVerify", "summaryIss", "summaryDetails"];
+
+            for (let elementId of summaryElements) {
+                let element = document.getElementById(elementId);
+                element.value = "";
+                validateCode(elementId);
             }
         }
 
@@ -238,7 +238,10 @@
         // Clears all the fields including errors
         // The section.clear() calls chain so we only need to call the topmost clear()
         //
-        document.getElementById('buttonClear').onclick = () => secScanQr.clear();
+        document.getElementById('buttonClear').onclick = () => {
+            secScanQr.clear();
+            clearDataExtract();
+        };
 
         //
         // User selected profile for FHIR validation

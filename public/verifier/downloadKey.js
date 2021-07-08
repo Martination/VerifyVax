@@ -22,10 +22,6 @@ const secDownloadKey = (() => {
             fetch('./CACovidKey.json')
                 .then(res => { return res.json(); })
                 .then(data => sec.setValue(JSON.stringify(data, null, 2)));
-            //  .then(data => CAcovidKey = JSON.stringify(data, null, 2))
-            //  .then(sec.setValue(CAcovidKey))
-
-            // await sec.setValue(CAcovidKey);
         } else {
             const url = 'download-public-key';
             let result = await restCall(url, { keyUrl: publicKeyUrl }, 'POST');
