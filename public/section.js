@@ -129,6 +129,7 @@ class Section {
             // <input type="button" ...
             this.button = document.createElement("INPUT");
             this.button.setAttribute("type", "button");
+            this.button.className = "btn btn-secondary btn-lg";
             this.button.value = buttonText || "Button";
             div0.appendChild(this.button);
             //this.button.onclick = async () => await this.process();

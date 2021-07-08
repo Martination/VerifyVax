@@ -15,7 +15,7 @@ label {
   text-align: center;
   text-decoration: none;
 }
-input[type="button"] {
+/* input[type="button"] {
   background-color: #6b7987;
   border-radius: 3px;
   border: 1px solid black;
@@ -27,7 +27,7 @@ input[type="button"] {
   text-align: center;
   text-decoration: none;
   width: 300px;
-}
+} */
 img {
   border: 1px solid black;
   height: 300px;
@@ -62,7 +62,7 @@ article {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
 }
-.footer {
+.clear {
   bottom: 0;
   color: white;
   left: 0;

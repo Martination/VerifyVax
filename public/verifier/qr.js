@@ -60,8 +60,12 @@ const secScanQr = (() => {
     async function scanQrCodes() {
 
         // reveal the qr scanner ui
-        const qrScanDiv = document.getElementById('CenterDIV');
-        qrScanDiv.style.display = 'block';
+        const qrModalEl = document.getElementById('qrModal');
+        const qrModal = bootstrap.Modal.getInstance(qrModalEl);
+
+        qrModal.show();
+        // const qrScanDiv = document.getElementById('CenterDIV');         // ~~~~~~~~~~~~~~~~~~
+        // qrScanDiv.style.display = 'block';
         const multiLabel = document.getElementById('multipart');
         multiLabel.innerHTML = ''; // may be dirty from previous scans
         let scannedParts = [];
@@ -118,7 +122,8 @@ const secScanQr = (() => {
         }
 
         // close the scanner ui
-        qrScanDiv.style.display = 'none';
+        // qrScanDiv.style.display = 'none';
+        qrModal.hide();
 
         return scannedParts;
     }
