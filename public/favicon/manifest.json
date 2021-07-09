@@ -3,7 +3,7 @@
   "short_name": "Verify Vax",
   "description": "Verify the vaccination status for SMART Health Cards",
   "author": "Martin Green",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "icons": [
     {
       "src": "favicon.svg",

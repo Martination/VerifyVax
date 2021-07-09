@@ -7,7 +7,7 @@ const QrScanner = function (vidId) {
     let vidStream;
 
     const overlay = document.createElement('DIV');
-    overlay.style = "position:absolute; border-color: #6B7987;border-style: solid;border-width: 2px;width: 200px; height: 200px; top: 0px; left: 0px";
+    overlay.style = "position:absolute; border-color: #6B7987;border-style: solid;border-width: 2px;width: 150px; height: 150px; top: 25px; left: 25px";
     overlay.hidden = true;
     video.parentElement.appendChild(overlay);
 
