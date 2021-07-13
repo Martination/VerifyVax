@@ -12,8 +12,8 @@ const secScanQr = (() => {
         console.log("Got a QR Code? ln:12");
         console.log(scannedParts);
 
-        document.getElementById('summaryWorking').value = "Processing";
-        window.validateCode('summaryWorking');
+        // document.getElementById('summaryWorking').value = "Processing";
+        // window.validateCode('summaryWorking');
 
         // for multi-part qrs add additional TAs with 'input' listeners
         for (let i = 0; i < scannedParts.length; i++) {

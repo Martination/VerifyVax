@@ -32,7 +32,7 @@ class Field {
 
         this.textArea.addEventListener('input', () => {
 
-            // console.log("Input changed");
+            console.log("Input changed");
             document.getElementById('summaryWorking').value = "Processing";
             window.validateCode('summaryWorking');
 
