@@ -77,6 +77,15 @@
                 The Verifier Portal takes as input, a QR-Code image of a SMART Health Card.
             </p>
 
+            <div id="vidTest">
+                <button class="btn btn-warning" onclick="qrScanner1.start()">New Scan ON</button>
+                <button class="btn btn-warning" onclick="qrScanner1.stop()">New Scan OFF</button>
+                Scan Data:
+                <span id="newScanData">Here</span>
+                <video id="qrVideo"></video>
+            </div>
+
+
             <hr>
             <div id="summary">
                 <div>
@@ -94,9 +103,6 @@
             <hr>
         </div>
 
-        <div id="vidTest">
-            <video id="qrVideo"></video>
-        </div>
 
         <div class="float-end">
             <button id="copy" class="btn btn-lg btn-info" onclick="copy()" data-bs-toggle="tooltip"
@@ -198,7 +204,7 @@
     <script type="text/javascript">
         const videoElem = document.getElementById("qrVideo");
         const qrScanner1 = new QrScanner(videoElem, result => console.log('decoded qr code:', result));
-        qrScanner1.start();
+        // qrScanner1.start();
     </script>
 
     <script>

@@ -7,7 +7,14 @@ const QrScanner2 = function (vidId) {
     let vidStream;
 
     const overlay = document.createElement('DIV');
-    overlay.style = "position:absolute; border-color: #6B7987;border-style: solid;border-width: 2px;width: 140px; height: 140px; top: 30px; left: 30px";
+    overlay.style = `position:absolute;
+                    border-color: #6B7987;
+                    border-style: solid;
+                    border-width: 2px;
+                    width: 140px;
+                    height: 140px;
+                    top: 30px;
+                    left: 30px`;
     overlay.hidden = true;
     video.parentElement.appendChild(overlay);
 
@@ -33,14 +40,15 @@ const QrScanner2 = function (vidId) {
             promise.resolve = resolve;
             promise.reject = reject;
             // Use facingMode: environment to attempt to get the front camera on phones
-            navigator.mediaDevices.getUserMedia({ video: { width: 600, facingMode: "environment" } }).then(function (stream) {
-                video.srcObject = stream;
-                video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
-                video.play();
-                vidStream = stream;
+            navigator.mediaDevices.getUserMedia({ video: { width: 600, facingMode: "environment" } })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                    video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+                    video.play();
+                    vidStream = stream;
 
-                requestAnimationFrame(tick);
-            });
+                    requestAnimationFrame(tick);
+                });
         });
     }
 
