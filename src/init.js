@@ -6,6 +6,7 @@ var fs = require('fs');
 
 // copies js file from the node_modules folder for use by the html pages in ./public
 fs.copyFileSync('node_modules/jsqr/dist/jsQR.js', 'public/jsQR.js');
+// fs.copyFileSync('node_modules/qr-scanner/qr-scanner.umd.min.js', 'public/qr-scanner.js');
 fs.copyFileSync('node_modules/github-markdown-css/github-markdown.css', 'public/github-markdown.css');
 
 console.log("Copied QR-scanner scripts to ./public");

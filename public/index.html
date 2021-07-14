@@ -32,8 +32,10 @@
     <link rel="stylesheet" href="portal.css">
     <link rel="stylesheet" href="github-markdown.css">
 
-    <script src="jsQR.js"></script>
-    <script src="qrscanner.js"></script>
+    <script src="jsQR.js">// Original scanning library</script>
+    <script src="qrscanner.js">// Custom code</script>
+    <!-- <script src="qr-scanner.js">// Imported npm module</script> -->
+    <script src="qr-scanner.umd.min.js"></script> <!-- Imported umd min npm module -->
 
 </head>
 
@@ -90,6 +92,10 @@
                 <input type="button" class="btn btn-primary btn-lg" id='buttonClear' value="Clear" />
             </div>
             <hr>
+        </div>
+
+        <div id="vidTest">
+            <video id="qrVideo"></video>
         </div>
 
         <div class="float-end">
@@ -189,6 +195,11 @@
     </div>
     -->
 
+    <script type="text/javascript">
+        const videoElem = document.getElementById("qrVideo");
+        const qrScanner1 = new QrScanner(videoElem, result => console.log('decoded qr code:', result));
+        qrScanner1.start();
+    </script>
 
     <script>
         feather.replace()
@@ -198,7 +209,7 @@
         //
         const qrModalEl = document.getElementById('qrModal');
         const qrModal = new bootstrap.Modal(qrModalEl);
-        const qrScanner = QrScanner('vid');
+        const qrScanner = QrScanner2('vid');
 
         function closeVideo() {
             // close the scan window if .stop() returns true (Actually stopped something)
