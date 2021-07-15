@@ -1,6 +1,6 @@
 const verifierDocs = {
   "scanQRCode": {
-    "l": "<p><strong>Requirements for Scanner:</strong>\nThe QR Scanner requires that your browser has access to a camera.</p>\n<p>When accessing the portal from a remote server, the browser will require a <strong>HTTPS</strong> connection to a access the camera.</p>\n<p>When using <code>localhost</code>, <strong>HTTP</strong> is sufficient.</p>\n<p>To Scan your QR code, try to align the QR code within the square overlay.  As camera resolutions may differ, you may have experiment with finding the best alignment. Make sure the QR-code is flat.</p>\n<p>Download a sample <strong>Numeric QR Code</strong> from <a href=\"https://spec.smarthealth.cards/examples/example-00-f-qr-code-numeric-value-0.txt\">https://spec.smarthealth.cards/examples/example-00-f-qr-code-numeric-value-0.txt</a></p>\n<p><input type=\"button\" id='buttonDownloadSample' value=\"Download Sample\" onclick=\"downloadNumericQRSample()\" />&nbsp;<input type=\"button\" id='buttonDownloadSample' value=\"Download Multi-Part Sample\" onclick=\"downloadMultiQRSample()\" /></p>\n<p><br><br></p>",
+    "l": "<p><strong>Requirements for Scanner:</strong>\nThe QR Scanner requires that your browser has access to a camera.</p>\n<p>When accessing the portal from a remote server, the browser will require a <strong>HTTPS</strong> connection to a access the camera.</p>\n<p>When using <code>localhost</code>, <strong>HTTP</strong> is sufficient.</p>\n<p>To Scan your QR code, try to align the QR code within the square overlay.  As camera resolutions may differ, you may have experiment with finding the best alignment. Make sure the QR-code is flat.</p>\n<p>Download a sample <strong>Numeric QR Code</strong> from <a href=\"https://spec.smarthealth.cards/examples/example-00-f-qr-code-numeric-value-0.txt\">https://spec.smarthealth.cards/examples/example-00-f-qr-code-numeric-value-0.txt</a></p>\n<p><br><br></p>",
     "r": ""
   },
   "decodeNumeric": {
@@ -24,7 +24,7 @@ const verifierDocs = {
     "r": ""
   },
   "extractFhirBundle": {
-    "l": "<h2 id=\"extractfhirbundle\">Extract FHIR Bundle</h2>\n<p>After signature verification, the FHIR Bundle is extracted from the JWS payload field and formatted for display.\n<br/></p>\n<p>Select optional FHIR validation profile:</p>\n<p><select id='profile-select' onchange=\"profileSelected()\">\n    <option value='any'>default</option>\n    <option value='usa-covid19-immunization'>usa-covid19-immunization</option>\n</select></p>\n<p><br><br></p>",
+    "l": "<h2 id=\"extractfhirbundle\">Extract FHIR Bundle</h2>\n<p>After signature verification, the FHIR Bundle is extracted from the JWS payload field and formatted for display.\n<br/></p>\n<p>Select optional FHIR validation profile:</p>\n<p><select id='profile-select' aria-label=\"FHIR Validation Type\" onchange=\"profileSelected()\" class=\"form-select text-center bg-secondary text-white\">\n    <option selected value='any'>default</option>\n    <option value='usa-covid19-immunization'>usa-covid19-immunization</option>\n</select></p>\n<p><br><br></p>",
     "r": ""
   }
 }

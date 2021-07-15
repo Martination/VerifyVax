@@ -77,8 +77,8 @@ class Field {
 
     set value(text) {
         this.textArea.value = text || '';
-        this.textArea.style.height = "1px";
-        this.textArea.style.height = Math.min(Math.max(this.height.min, this.textArea.scrollHeight), this.height.max) + "px";
+        // this.textArea.style.height = "1px";
+        // this.textArea.style.height = Math.min(Math.max(this.height.min, this.textArea.scrollHeight), this.height.max) + "px";
         if (this.textArea === '') this.errors = [];
         this.textArea.style.background = this.options.color.update;
         setTimeout(() => {
@@ -133,7 +133,7 @@ class Section {
             // <input type="button" ...
             this.button = document.createElement("INPUT");
             this.button.setAttribute("type", "button");
-            this.button.className = "btn btn-secondary btn-lg";
+            this.button.className = "btn btn-secondary btn-lg mb-2";
             this.button.value = buttonText || "Button";
             div0.appendChild(this.button);
             //this.button.onclick = async () => await this.process();
@@ -142,7 +142,7 @@ class Section {
 
         //<span class="info collapsible"
         const span0 = document.createElement("SPAN");
-        span0.className = "info collapsible";
+        span0.className = "info collapsible fs-6";
         span0.innerHTML = "&nbsp;&nbsp;?&nbsp;&nbsp;";
         div0.appendChild(span0);
 
@@ -150,8 +150,8 @@ class Section {
         const div01 = document.createElement("DIV");
         div01.setAttribute("class", "docs");
         div01.setAttribute("id", "docs" + id);
-        div01.style = "display: flex;margin-bottom: 10px;";
-        div01.className = "content";
+        div01.style = "display: flex;";
+        div01.className = "content mb-2";
         div0.appendChild(div01);
 
         //const docHtml = converter.makeHtml(textDoc);

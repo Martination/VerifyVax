@@ -31,4 +31,4 @@ function buildDocs(markdownPath: string, outputPath: string, varName: string) {
 }
 
 buildDocs('./docs/verifierDocs.md', './public/verifierDocs.js', 'verifierDocs');
-buildDocs('./docs/developerDocs.md', './public/developerDocs.js', 'developerDocs');
+// buildDocs('./docs/developerDocs.md', './public/developerDocs.js', 'developerDocs');

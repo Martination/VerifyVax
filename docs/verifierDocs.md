@@ -10,7 +10,6 @@ To Scan your QR code, try to align the QR code within the square overlay.  As ca
 
 Download a sample __Numeric QR Code__ from [https://spec.smarthealth.cards/examples/example-00-f-qr-code-numeric-value-0.txt](https://spec.smarthealth.cards/examples/example-00-f-qr-code-numeric-value-0.txt)
 
-<input type="button" id='buttonDownloadSample' value="Download Sample" onclick="downloadNumericQRSample()" />&nbsp;<input type="button" id='buttonDownloadSample' value="Download Multi-Part Sample" onclick="downloadMultiQRSample()" />
 
 <br><br>
 <!-- label:scanQRCode side:right-->
@@ -146,8 +145,8 @@ After signature verification, the FHIR Bundle is extracted from the JWS payload 
 
 Select optional FHIR validation profile:
 
-<select id='profile-select' onchange="profileSelected()">
-    <option value='any'>default</option>
+<select id='profile-select' aria-label="FHIR Validation Type" onchange="profileSelected()" class="form-select text-center bg-secondary text-white">
+    <option selected value='any'>default</option>
     <option value='usa-covid19-immunization'>usa-covid19-immunization</option>
 </select>
 

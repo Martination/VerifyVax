@@ -7,14 +7,15 @@ const QrScanner2 = function (vidId) {
     let vidStream;
 
     const overlay = document.createElement('DIV');
-    overlay.style = `position:absolute;
-                    border-color: #6B7987;
-                    border-style: solid;
-                    border-width: 2px;
-                    width: 140px;
-                    height: 140px;
-                    top: 30px;
-                    left: 30px`;
+    overlay.id = "overlay";
+    // overlay.style = `position:absolute;
+    //                 border-color: #6B7987;
+    //                 border-style: solid;
+    //                 border-width: 2px;
+    //                 width: 140px;
+    //                 height: 140px;
+    //                 top: 50px;
+    //                 left: 50px`;
     overlay.hidden = true;
     video.parentElement.appendChild(overlay);
 
@@ -61,8 +62,8 @@ const QrScanner2 = function (vidId) {
             canvas.drawImage(video, 0, 0, video.videoHeight, video.videoHeight);
 
             const vidContainer = video.parentElement;
-            overlay.style.top = Math.ceil((vidContainer.clientHeight) - parseInt(overlay.style.height)) / 2 + "px";
-            overlay.style.left = Math.ceil(vidContainer.clientWidth - parseInt(overlay.style.width)) / 2 + "px";
+            overlay.style.top = Math.max(((vidContainer.clientHeight - overlay.offsetHeight) / 2), 50) + "px";
+            overlay.style.left = Math.max(((vidContainer.clientWidth - overlay.offsetWidth) / 2), 50) + "px";
             overlay.hidden = false;
 
             const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
@@ -71,13 +72,23 @@ const QrScanner2 = function (vidId) {
             });
 
             if (code) {
-                promise.resolve({ data: code.data, version: code.version, state: "complete" });
+                try {
+                    promise.resolve({ data: code.data, version: code.version, state: "complete" });
+                } catch (error) {
+                    console.log("~~~~~~~~1st Resolve error~~~~~~~~~~")
+                    // console.error(error);
+                }
                 stop();
                 return;
             }
         }
 
-        requestAnimationFrame(tick);
+        try {
+            requestAnimationFrame(tick);
+        } catch (error) {
+            console.log("~~~~~~~~~Resolve error~~~~~~~~~~~~")
+            // console.error(error);
+        }
     }
 
     return {

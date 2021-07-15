@@ -77,12 +77,12 @@
                 The Verifier Portal takes as input, a QR-Code image of a SMART Health Card.
             </p>
 
-            <div id="vidTest">
+            <div class="text-break" id="vidTest">
                 <button class="btn btn-warning" onclick="qrScanner1.start()">New Scan ON</button>
                 <button class="btn btn-warning" onclick="qrScanner1.stop()">New Scan OFF</button>
+                <video class="ratio ratio-1x1" id="qrVideo"></video>
                 Scan Data:
                 <span id="newScanData">Here</span>
-                <video id="qrVideo"></video>
             </div>
 
 
@@ -222,18 +222,10 @@
         const qrScanner = QrScanner2('vid');
 
         function closeVideo() {
-            // close the scan window if .stop() returns true (Actually stopped something)
-            // This should work, not tested on mobile/with working camera
-
             qrScanner.stop();
-            // qrModal.hide();
-
-            //document.getElementById('CenterDIV').style.display = 'none';
             //qrScanner.stop() && (document.getElementById('CenterDIV').style.display = 'none');
         }
-        qrModalEl.addEventListener('hide.bs.modal', function (event) {
-            closeVideo();
-        })
+        qrModalEl.addEventListener('hide.bs.modal', closeVideo);
 
 
         const copyButton = document.getElementById("copy");
@@ -249,9 +241,12 @@
 
             /* Select the text field */
             copyText.select();
-            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            copyText.focus();
+            copyText.setSelectionRange(0, 99999, "backward");
             if (document.execCommand("copy")) {
                 copyText.blur();
+                copyText.scrollTo(0, 0);    // Doesn't work in Firefox?
+
                 copyButton.dispatchEvent(new Event('updated'));
             } else {
                 alert("Failed to copy");    // Replace with an update tooltip or toast
@@ -294,6 +289,7 @@
 
             // And because the trigger is now 'manual', recreate it with default hover behavior
             this.title = this.dataset["title"];
+            this.dataset["bsTrigger"] = 'hover focus';
             tooltip = new bootstrap.Tooltip(this);
         }
 
@@ -407,10 +403,7 @@
             secExtractFhirBundle.setValue(secExtractFhirBundle.getValue());
         }
 
-
     </script>
-
-
 </body>
 
 </html>

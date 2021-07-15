@@ -9,11 +9,11 @@ const secScanQr = (() => {
         this.clear();
         const scannedParts = await scanQrCodes();
 
-        console.log("Got a QR Code? ln:12");
-        console.log(scannedParts);
-
-        // document.getElementById('summaryWorking').value = "Processing";
-        // window.validateCode('summaryWorking');
+        if (scannedParts.length) {
+            console.log("Got a scanned QR Code", scannedParts);
+            document.getElementById('summaryWorking').value = "Processing";
+            window.validateCode('summaryWorking');
+        }
 
         // for multi-part qrs add additional TAs with 'input' listeners
         for (let i = 0; i < scannedParts.length; i++) {
@@ -62,16 +62,11 @@ const secScanQr = (() => {
         // reveal the qr scanner ui
         const qrModalEl = document.getElementById('qrModal');
         const qrModal = bootstrap.Modal.getInstance(qrModalEl);
-
         qrModal.show();
-        // const qrScanDiv = document.getElementById('CenterDIV');
-        // qrScanDiv.style.display = 'block';
+
         const multiLabel = document.getElementById('multipart');
         multiLabel.innerHTML = ''; // may be dirty from previous scans
         let scannedParts = [];
-
-        // console.log("Open Scanner");
-        // clearDataExtract();
 
         while (true) {
 
@@ -125,11 +120,17 @@ const secScanQr = (() => {
         }
 
         // close the scanner ui
-        // qrScanDiv.style.display = 'none';
         qrModal.hide();
+        while (qrModal._isShown) {
+            // Sometimes the scan happens so fast that the modal isn't hidden in time
+            qrModal.hide();
+            if (qrModal._isShown) await delay(10);
+        }
 
         return scannedParts;
     }
+
+    const delay = ms => new Promise(res => setTimeout(res, ms));
 
 
     //
