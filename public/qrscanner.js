@@ -1,4 +1,4 @@
-const QrScanner2 = function (vidId) {
+const QrScanner = function (vidId) {
 
     const video = document.getElementById(vidId);
     const canvasElement = document.createElement("canvas");
@@ -8,14 +8,6 @@ const QrScanner2 = function (vidId) {
 
     const overlay = document.createElement('DIV');
     overlay.id = "overlay";
-    // overlay.style = `position:absolute;
-    //                 border-color: #6B7987;
-    //                 border-style: solid;
-    //                 border-width: 2px;
-    //                 width: 140px;
-    //                 height: 140px;
-    //                 top: 50px;
-    //                 left: 50px`;
     overlay.hidden = true;
     video.parentElement.appendChild(overlay);
 

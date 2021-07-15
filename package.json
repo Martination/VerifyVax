@@ -29,7 +29,6 @@
         "jsqr": "^1.4.0",
         "node-jose": "^2.0.0",
         "pako": "^2.0.3",
-        "qr-scanner": "^1.2.0",
         "qrcode": "^1.4.4",
         "showdown": "^1.9.1",
         "ts-node": "^9.1.1",
