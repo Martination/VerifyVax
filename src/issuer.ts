@@ -2,12 +2,6 @@ import jose, { JWK } from 'node-jose';
 import pako from 'pako';
 import QrCode, { QRCodeSegment } from 'qrcode';
 import { Config } from './config';
-// import { generatePDFCard, generatePDFCardFromQRFile } from './pdf';
-
-// IMPLEMENTERS NOTE: this is a sample only private key, application should take care
-// of protecting the issuing signing keys. See, e.g.,
-// https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html
-// import issuerPrivateKey from '../private/issuer.jwks.private.json';
 
 
 const MAX_SINGLE_JWS_SIZE = 1195;
@@ -56,6 +50,7 @@ export function deflate(payload: string): Buffer {
   return Buffer.from(pako.deflateRaw(payload));
 }
 
+// Possibly the only function of this file that is still used
 export function inflate(payload: string): string {
   return pako.inflateRaw(Buffer.from(payload, 'base64'), { to: 'string' });
 }

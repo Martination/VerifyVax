@@ -57,7 +57,8 @@ app.post(Config.VALIDATE_JWS, async (req, res) => {
 
 
 app.post(Config.VALIDATE_PAYLOAD, async (req, res) => {
-    console.log('Received POST for', Config.VALIDATE_PAYLOAD, req.body);
+    console.log('Received POST for', Config.VALIDATE_PAYLOAD);
+    // console.log('Received POST for', Config.VALIDATE_PAYLOAD, req.body);
     // console.log('VALIDATE PAYLOAD');
     const payload = req.body.data;
     const errors = await validate.jwspayload(payload);
