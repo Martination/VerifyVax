@@ -29,14 +29,8 @@ const secScanQr = (() => {
         this.valid() ? this.goNext() : this.next.clear();
     };
 
-    //
     // override the getValue function to return combined numeric data
-    //
     sec.getValue = function () {
-
-        // console.log("Got a pasted QR code ln:37");
-        // document.getElementById('summaryWorking').value = "Processing";
-        // window.validateCode('summaryWorking');
 
         const orderedParts = hasAllParts(this);
         if (orderedParts) {
@@ -46,17 +40,13 @@ const secScanQr = (() => {
         return this.fields[0].value;
     }
 
-    //
     // override the clear method to remove multi-part fields
-    //
     sec.clear = async function () {
         Section.prototype.clear.call(this);
         this.resetTextFields();
     }
 
-    //
     // Opens the scanner UI and scans single and multi-part qr codes
-    //
     async function scanQrCodes() {
 
         // reveal the qr scanner ui
@@ -133,10 +123,8 @@ const secScanQr = (() => {
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
 
-    //
     // Parses single and multi-part QR code data into objects containing the part-number, part-count, numeric-data
     //   Note: Single part QR codes will have an 'undefined' 'parts' property.
-    //
     function parseShc(schString) {
 
         schString = schString.trim();
@@ -153,10 +141,8 @@ const secScanQr = (() => {
     }
 
 
-    //
     // Collects the shc string from each TextArea and parses each into an array of objects
     //   Note: if one of the fields cannot be parsed, 'undefined' is returned
-    //
     function collectParts(section) {
         const parts = [];
         for (let i = 0; i < section.fields.length; i++) {
@@ -168,11 +154,9 @@ const secScanQr = (() => {
     }
 
 
-    //
     // Collects and parses all the shc TextAreas and determines if each of the n parts is defined.
     // Additionally the parts are ordered 1..n
     //   Note: if one of the fields cannot be parsed, 'undefined' is returned
-    //
     function hasAllParts(section) {
 
         const partsArray = collectParts(section);

@@ -1,6 +1,6 @@
 {
     "name": "verifyvax",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Verify vax status using SMART Health Cards for Covid-19",
     "main": "src/server.ts",
     "engines": {

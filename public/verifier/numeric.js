@@ -19,9 +19,6 @@ const secDecodeNumeric = (() => {
             // merge the array into a single base64 string
             .join('');
 
-        // document.getElementById('summaryWorking').value = "Processing";
-        // window.validateCode('summaryWorking');
-
         await sec.setValue(jws.split('.').join('\n.\n'));
 
     };

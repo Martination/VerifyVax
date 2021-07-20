@@ -66,10 +66,7 @@ const QrScanner = function (vidId) {
             if (code) {
                 try {
                     promise.resolve({ data: code.data, version: code.version, state: "complete" });
-                } catch (error) {
-                    console.log("~~~~~~~~1st Resolve error~~~~~~~~~~")
-                    // console.error(error);
-                }
+                } catch (error) { }
                 stop();
                 return;
             }
@@ -77,10 +74,7 @@ const QrScanner = function (vidId) {
 
         try {
             requestAnimationFrame(tick);
-        } catch (error) {
-            console.log("~~~~~~~~~Resolve error~~~~~~~~~~~~")
-            // console.error(error);
-        }
+        } catch (error) { }
     }
 
     return {

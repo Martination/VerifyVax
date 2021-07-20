@@ -60,9 +60,7 @@ const secVerifySignature = (() => {
     }
 
 
-    //
     // Select the first key in the key collection where 'kid' equals the 'kid' in the Jws-Header
-    //
     function selectKey() {
 
         let keySet = secDownloadKey.getValue();

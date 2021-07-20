@@ -77,8 +77,6 @@ class Field {
 
     set value(text) {
         this.textArea.value = text || '';
-        // this.textArea.style.height = "1px";
-        // this.textArea.style.height = Math.min(Math.max(this.height.min, this.textArea.scrollHeight), this.height.max) + "px";
         if (this.textArea === '') this.errors = [];
         this.textArea.style.background = this.options.color.update;
         setTimeout(() => {
@@ -108,18 +106,17 @@ class Field {
 }
 
 
-
 class Section {
 
-    taError;
     button = undefined;
+    next = undefined;
+    fields = [];
+    errors = [];
+    taError;
     doc0;
     doc1;
-    fields = [];
     id;
     content;
-    next = undefined;
-    errors = [];
 
 
     constructor(id, buttonText) {
@@ -209,10 +206,8 @@ class Section {
     }
 
 
-    //
     // Sets text in the collapsable Error field. Field will collapse when empty
     // Label allows errors to be put into groups
-    //
     setErrors(errors, index = -1) {
 
         // convert strings to error objects
@@ -234,10 +229,8 @@ class Section {
     }
 
 
-    //
     // Sets text in the collapsable Error field. Field will collapse when empty
     // Specify label to clear only errors of that group. Use no label to clear everything
-    //
     clearErrors(index = -1) {
 
         if (index >= 0) {
@@ -288,10 +281,8 @@ class Section {
     }
 
 
-    //
     // Sets the collapsable documentation sections 0-left, 1-right
     // accepts text as markdown and converts it to formatted html
-    //
     setDocs(markdownLeft, markdownRight) {
 
         if (markdownLeft && markdownLeft.trim().length) {
@@ -321,19 +312,14 @@ class Section {
     }
 
 
-    //
     // Adds additional text fields below the default text field
     // The new field can be accessed by this.fields[i] or this.values[id]
-    //
     addTextField(placeholder, name) {
         this.fields.push(new Field(this, name, placeholder));
     }
 
 
-
-    //
     // Reset to single TA
-    //
     resetTextFields() {
         for (let i = 1; i < this.fields.length;) {
             this.fields[1].delete();        // I think this needs to be [i] not [1]?
@@ -341,17 +327,13 @@ class Section {
     }
 
 
-    //
     // Gets the value of a field by id or the first field
-    //
     getValue(index = 0) {
         return this.fields[index].value;
     }
 
 
-    //
     // Sets the value of a field by id or the first field
-    //
     async setValue(value, index = 0) {
         const field = this.fields[index];
 
@@ -362,22 +344,17 @@ class Section {
     }
 
 
-    //
     // Clear all fields
-    //
     clear() {
         this.clearErrors();
         this.fields.forEach(f => f.value = undefined);
         if (this.next) this.next.clear();
         else clearDataExtract();
-        // else { console.log("Clearing data"); clearDataExtract(); }
         // This is called twice before processing begins each time, for some reason
     }
 
 
-    //
     // returns true if each field has data, but there are no errors.
-    //
     valid() {
         if (this.fields.some(field => !field.valid())) return false;
 
@@ -387,9 +364,7 @@ class Section {
     }
 
 
-    //
     // Triggers the button on the next section if .next is assigned
-    //
     goNext() {
         if (!this.next) return;
 
@@ -399,18 +374,13 @@ class Section {
     }
 
 
-    //
     // Calls into the overridden process function
-    //
     async process() {
         await this.process();
     }
 
 
-
-    //
     // Calls into the overridden validate function
-    //
     async validate() {
         await this.validate(this.fields[0]);
     }

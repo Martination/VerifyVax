@@ -1,8 +1,3 @@
-// let CAcovidKey;
-// fetch('./CACovidKey.json')
-//     .then(res => { return res.json(); })
-//     .then(data => CAcovidKey = JSON.stringify(data, null, 2));
-
 const secDownloadKey = (() => {
 
     const sec = new Section('downloadKey', "Download Issuer Public Key");

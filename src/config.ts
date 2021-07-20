@@ -3,7 +3,6 @@ export const Config = {
     // REST API endpoints
     VALIDATE_FHIR_BUNDLE:                   '/validate-fhir-bundle',
     VALIDATE_QR_NUMERIC:                    '/validate-qr-numeric',
-    VALIDATE_JWS:                           '/validate-jws',
     VALIDATE_PAYLOAD:                       '/validate-jws-payload',
     VALIDATE_KEYSET:                        '/validate-key-set',
     INFLATE_PAYLOAD:                        '/inflate-payload',

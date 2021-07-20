@@ -43,15 +43,9 @@ const validate = (function () {
         return errors;
     }
 
-    validate.keySet = function (text) {
+    validate.keySet = function (text) { }
 
-
-    }
-
-    validate.json = function (text) {
-
-
-    }
+    validate.json = function (text) { }
 
     validate.minified = async function (text) {
 
