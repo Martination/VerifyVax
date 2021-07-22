@@ -23,10 +23,9 @@ class Field {
         this.name = name;
         this.textArea = document.createElement("TEXTAREA");
         this.textArea.setAttribute("placeholder", placeholder);
+        this.textArea.setAttribute("aria-labelledby", this.section.button.id);
 
-        const div = document.createElement("DIV");
-        div.appendChild(this.textArea);
-        section.content.appendChild(div);
+        section.sectionValue.appendChild(this.textArea);
 
         let timer;
 
@@ -97,7 +96,7 @@ class Field {
     }
 
     delete() {
-        this.section.content.removeChild(this.textArea.parentElement);
+        this.section.sectionValue.removeChild(this.textArea.parentElement);
         this.textArea.parentElement.remove();
         this.textArea.remove();
         this.section.fields.splice(this.index, 1);
@@ -113,10 +112,10 @@ class Section {
     fields = [];
     errors = [];
     taError;
-    doc0;
-    doc1;
+    docLeft;
+    docRight;
     id;
-    content;
+    sectionValue;
 
 
     constructor(id, buttonText) {
@@ -124,81 +123,78 @@ class Section {
         this.id = id;
 
         // <div class="section">
-        const div0 = document.getElementById(id);
+        const sectionDiv = document.getElementById(id);
+        sectionDiv.className = "section";
 
         if (buttonText) {
             // <input type="button" ...
             this.button = document.createElement("INPUT");
             this.button.setAttribute("type", "button");
             this.button.className = "btn btn-secondary btn-lg mb-2";
+            this.button.id = id + "Button";
             this.button.value = buttonText || "Button";
-            div0.appendChild(this.button);
-            //this.button.onclick = async () => await this.process();
+            sectionDiv.appendChild(this.button);
             this.button.onclick = this.process.bind(this);
         }
 
-        //<span class="info collapsible"
-        const span0 = document.createElement("SPAN");
-        span0.className = "info collapsible fs-6";
-        span0.innerHTML = "&nbsp;&nbsp;?&nbsp;&nbsp;";
-        div0.appendChild(span0);
+        //<input type="button" class="info collapsible"
+        const infoButton = document.createElement("INPUT");
+        infoButton.setAttribute("type", "button");
+        infoButton.className = "info collapsible fs-6 btn-dark m-1 border border-0";
+        infoButton.value = "  ?  ";
+        infoButton.setAttribute("tabindex", "0");
+        sectionDiv.appendChild(infoButton);
 
         // <div id="docsDecodeJWS" class="docs"></div>
-        const div01 = document.createElement("DIV");
-        div01.setAttribute("class", "docs");
-        div01.setAttribute("id", "docs" + id);
-        div01.style = "display: flex;";
-        div01.className = "content mb-2";
-        div0.appendChild(div01);
+        const docsDiv = document.createElement("DIV");
+        docsDiv.setAttribute("id", "docs" + id);
+        docsDiv.style = "display: flex;";
+        docsDiv.className = "content mb-2";
+        sectionDiv.appendChild(docsDiv);
 
-        //const docHtml = converter.makeHtml(textDoc);
-        var div010 = document.createElement('DIV');
-        div010.style = "width: 50%;padding-right: 5px;";
-        div01.appendChild(div010);
+        var markdownLeftDiv = document.createElement('DIV');
+        markdownLeftDiv.style = "width: 50%;padding-right: 5px;";
+        docsDiv.appendChild(markdownLeftDiv);
 
-        this.doc0 = document.createElement('article');
-        this.doc0.className = "markdown-body";
-        this.doc0.innerHTML = "docHtml";
-        div010.appendChild(this.doc0);
+        this.docLeft = document.createElement('article');
+        this.docLeft.className = "markdown-body";
+        this.docLeft.innerHTML = "docHtml";
+        markdownLeftDiv.appendChild(this.docLeft);
 
-        var div011 = document.createElement('div');
-        div011.style = "flex-grow: 1;padding-left: 5px;";
-        div01.appendChild(div011);
+        var markdownRightDiv = document.createElement('div');
+        markdownRightDiv.style = "flex-grow: 1;padding-left: 5px;";
+        docsDiv.appendChild(markdownRightDiv);
 
-        // placeholder for controls
-        this.content = document.createElement("DIV");
-        div0.appendChild(this.content);
-
-        var content0 = document.createElement("DIV");
-        this.content.appendChild(content0);
+        this.sectionValue = document.createElement("DIV");
+        sectionDiv.appendChild(this.sectionValue);
 
         // <span class="error collapsible"></span>
-        const span1 = document.createElement("SPAN");
-        span1.className = "error collapsible";
-        div0.appendChild(span1);
+        const errorSpan = document.createElement("SPAN");
+        errorSpan.className = "error collapsible";
+        sectionDiv.appendChild(errorSpan);
 
         // <div id="docsDecodeJWS" class="docs"></div>
-        const div03 = document.createElement("DIV");
-        div03.className = "content";
-        div0.appendChild(div03);
+        const errorDiv = document.createElement("DIV");
+        errorDiv.className = "content";
+        sectionDiv.appendChild(errorDiv);
 
-        //  <textarea class='taError' id="taJWSPayloadError"></textarea>
+        //  <textarea class="taError" id="taJWSPayloadError"></textarea>
         this.taError = document.createElement("TEXTAREA");
         this.taError.className = "taError";
         this.taError.readOnly = true;
+        this.taError.placeholder = "No errors";
         this.taError.setAttribute("id", "ta" + id + "Error");
         this.taError.setAttribute("wrap", "off");
-        div03.appendChild(this.taError);
+        errorDiv.appendChild(this.taError);
 
-        this.span = span0;
+        this.info = infoButton;
 
-        this.span.addEventListener("click", () => {
-            //this.span.classList.toggle("active");
-            var content = this.span.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
+        this.info.addEventListener("click", () => {
+            var docsBody = this.info.nextElementSibling;
+            if (docsBody.style.maxHeight) {
+                docsBody.style.maxHeight = null;
             } else {
-                content.style.maxHeight = content.scrollHeight + "px";
+                docsBody.style.maxHeight = docsBody.scrollHeight + "px";
             }
         });
 
@@ -273,6 +269,7 @@ class Section {
         element.value = allErrors.join('\n');
         element.style.background = errors ? '#e097a2' : '#f7ca6b';
 
+
         // expand the error TA and parent DIV elements
         element.style.height = "1px";
         element.style.maxHeight = height.max + 'px';
@@ -281,32 +278,31 @@ class Section {
     }
 
 
-    // Sets the collapsable documentation sections 0-left, 1-right
+    // Sets the collapsable documentation sections left, right
     // accepts text as markdown and converts it to formatted html
     setDocs(markdownLeft, markdownRight) {
 
         if (markdownLeft && markdownLeft.trim().length) {
-            //doc0 parent style = "width: 50%;padding-right: 5px;";
-            this.doc0.innerHTML = markdownLeft;
+            this.docLeft.innerHTML = markdownLeft;
 
-            if (markdownRight === null) {
+            if (!markdownRight) {
                 // span left across 100%
-                this.doc0.parentElement.style = "width: 100%;";
-                const rightDiv = this.doc0.parentElement.nextElementSibling;
-                this.doc0.parentElement.parentElement.removeChild(rightDiv);
+                this.docLeft.parentElement.style = "width: 100%;";
+                const rightDiv = this.docLeft.parentElement.nextElementSibling;
+                this.docLeft.parentElement.parentElement.removeChild(rightDiv);
                 return;
             }
         }
 
         if (markdownRight && markdownRight.trim().length) {
 
-            if (this.doc1 == null) {
-                this.doc1 = document.createElement('article');
-                this.doc1.className = "markdown-body";
-                this.doc0.parentElement.nextElementSibling.appendChild(this.doc1);
+            if (this.docRight == null) {
+                this.docRight = document.createElement('article');
+                this.docRight.className = "markdown-body";
+                this.docLeft.parentElement.nextElementSibling.appendChild(this.docRight);
             }
 
-            this.doc1.innerHTML = markdownRight;
+            this.docRight.innerHTML = markdownRight;
         }
 
     }

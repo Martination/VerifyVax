@@ -2,7 +2,7 @@
 __Requirements for Scanner:__
 The QR Scanner requires that your browser has access to a camera.
 
-When accessing the portal from a remote server, the browser will require a __HTTPS__ connection to a access the camera.
+When accessing the portal from a remote server, the browser will require an __HTTPS__ connection to access the camera.
 
 When using `localhost`, __HTTP__ is sufficient.
 

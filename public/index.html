@@ -16,9 +16,8 @@
     <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#603cba">
     <meta name="msapplication-TileColor" content="#603cba">
     <meta name="msapplication-config" content="favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
 
-    <link rel="manifest" href="favicon/manifest.json">
+    <link rel="manifest" href="manifest.webmanifest">
 
     <link rel="shortcut icon" href="favicon/favicon.ico">
     <link rel="icon" type="image/png" href="favicon/favicon.png">
@@ -27,8 +26,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="portal.css">
     <link rel="stylesheet" href="github-markdown.css">
+    <link rel="stylesheet" href="portal.css">
 
     <script src="jsQR.js"></script>
     <script src="qrscanner.js"></script>
@@ -46,10 +45,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
-    <script src='verifierDocs.js'></script>
-    <script src='section.js'></script>
-    <script src='utils.js'></script>
-    <script src='validate.js'></script>
+    <script src="verifierDocs.js"></script>
+    <script src="section.js"></script>
+    <script src="utils.js"></script>
+    <script src="validate.js"></script>
 
 
     <div class="container text-white text-break">
@@ -64,9 +63,7 @@
 
             <hr>
             <div id="summary">
-                <div>
-                    <h5><span id="summaryWorking"></span>&nbsp;</h5>
-                </div>
+                <div class="fs-5"><span id="summaryWorking"></span>&nbsp;</div>
                 <div>Verified real? <span class="fw-bold fst-italic" id="summaryVerify"></span></div>
                 <div>Issued by: <span id="summaryIss"></span></div><br />
                 <div>Personal Details <span id="summaryDetails"></span></div>
@@ -74,7 +71,7 @@
 
             <br />
             <div class="text-center">
-                <input type="button" class="btn btn-primary btn-lg" id='buttonClear' value="Clear" />
+                <input type="button" class="btn btn-primary btn-lg" id="buttonClear" value="Clear" />
             </div>
             <hr>
         </div>
@@ -82,18 +79,20 @@
 
         <div class="float-end">
             <button id="copy" class="btn btn-lg btn-info" onclick="copy()" data-bs-toggle="tooltip"
-                title="Copy to Clipboard" data-title="Copy to Clipboard" data-update="Copied!">
-                <i class="d-block d-md-none" data-feather="clipboard"></i>
+                title="Copy to Clipboard" data-title="Copy to Clipboard" aria-label="Copy to Clipboard"
+                data-update="Copied!">
+                <i class="d-block d-md-none" data-feather="clipboard" aria-labelledby="copy"></i>
                 <span class="d-none d-md-block">Copy QR Code</span>
             </button>
             <button id="paste" class="btn btn-lg btn-info" onclick="paste()" data-bs-toggle="tooltip"
-                title="Paste from Clipboard" data-title="Paste from Clipboard" data-update="Pasted!">
+                title="Paste from Clipboard" data-title="Paste from Clipboard" aria-label="Paste from Clipboard"
+                data-update="Pasted!">
                 <i class="d-block d-md-none" data-feather="copy"></i>
                 <span class="d-none d-md-block">Paste QR Code</span>
             </button>
         </div>
         <div id="scanQr" class="section pb-4"></div>
-        <script src='verifier/qr.js'></script>
+        <script src="verifier/qr.js"></script>
 
         <div class="py-2">
             <button class="btn btn-light btn-lg mb-4" data-bs-target="#collapseTarget" data-bs-toggle="collapse">
@@ -106,32 +105,32 @@
                     succeed without successful processing of the previous step.</p>
 
                 <div id="decodeNumeric" class="section pb-4"></div>
-                <script src='verifier/numeric.js'></script>
+                <script src="verifier/numeric.js"></script>
                 <script>secScanQr.next = secDecodeNumeric</script>
 
 
                 <div id="decodeJWS" class="section pb-4"></div>
-                <script src='verifier/jws.js'></script>
+                <script src="verifier/jws.js"></script>
                 <script>secDecodeNumeric.next = secDecodeJWS;</script>
 
 
                 <div id="extractPublicKey" class="section pb-4"></div>
-                <script src='verifier/extractKey.js'></script>
+                <script src="verifier/extractKey.js"></script>
                 <script>secDecodeJWS.next = secExtractPublicKey;</script>
 
 
                 <div id="downloadKey" class="section pb-4"></div>
-                <script src='verifier/downloadKey.js'></script>
+                <script src="verifier/downloadKey.js"></script>
                 <script>secExtractPublicKey.next = secDownloadKey;</script>
 
 
                 <div id="verifySignature" class="section pb-4"></div>
-                <script src='verifier/signature.js'></script>
+                <script src="verifier/signature.js"></script>
                 <script>secDownloadKey.next = secVerifySignature</script>
 
 
                 <div id="extractFhirBundle" class="section pb-4"></div>
-                <script src='verifier/fhir.js'></script>
+                <script src="verifier/fhir.js"></script>
                 <script>secVerifySignature.next = secExtractFhirBundle;</script>
 
             </div>
@@ -149,8 +148,8 @@
                 </div>
                 <div class="modal-body">
                     <div id="vidParent" class="ratio ratio-1x1">
-                        <video id='vid'></video>
-                        <label id='multipart' style="position:absolute; top: 10px; left: 10px"></label>
+                        <video id="vid"></video>
+                        <label id="multipart"></label>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
@@ -165,14 +164,14 @@
         feather.replace()
 
         // Scanner
-        const qrModalEl = document.getElementById('qrModal');
+        const qrModalEl = document.getElementById("qrModal");
         const qrModal = new bootstrap.Modal(qrModalEl);
-        const qrScanner = QrScanner('vid');
+        const qrScanner = QrScanner("vid");
 
         function closeVideo() {
             qrScanner.stop();
         }
-        qrModalEl.addEventListener('hide.bs.modal', closeVideo);
+        qrModalEl.addEventListener("hide.bs.modal", closeVideo);
 
 
         // Copy and Paste buttons
@@ -193,7 +192,7 @@
                 // copyText.blur();
                 copyText.scrollTo(0, 0);    // Doesn't work in Firefox?
 
-                copyButton.dispatchEvent(new Event('updated'));
+                copyButton.dispatchEvent(new Event("updated"));
             } else {
                 alert("Failed to copy");    // Replace with an update tooltip or toast
             }
@@ -206,8 +205,8 @@
                 .then((text) => {
                     pasteText.innerHTML = text;
                     pasteText.value = text;
-                    pasteButton.dispatchEvent(new Event('updated'));
-                    pasteText.dispatchEvent(new Event('input'));
+                    pasteButton.dispatchEvent(new Event("updated"));
+                    pasteText.dispatchEvent(new Event("input"));
                 });
         }
 
@@ -230,17 +229,17 @@
 
             // And because the trigger is now 'manual', recreate it with default hover behavior
             this.title = this.dataset["title"];
-            this.dataset["bsTrigger"] = 'hover focus';
+            this.dataset["bsTrigger"] = "hover focus";
             tooltip = new bootstrap.Tooltip(this);
         }
 
-        copyButton.addEventListener('updated', updateTooltip);
-        pasteButton.addEventListener('updated', updateTooltip);
+        copyButton.addEventListener("updated", updateTooltip);
+        pasteButton.addEventListener("updated", updateTooltip);
 
-        copyButton.addEventListener('mouseleave', clearTooltip);
-        copyButton.addEventListener('blur', clearTooltip);
-        pasteButton.addEventListener('mouseleave', clearTooltip);
-        pasteButton.addEventListener('blur', clearTooltip);
+        copyButton.addEventListener("mouseleave", clearTooltip);
+        copyButton.addEventListener("blur", clearTooltip);
+        pasteButton.addEventListener("mouseleave", clearTooltip);
+        pasteButton.addEventListener("blur", clearTooltip);
 
 
         // Display the summary data at the top
@@ -297,16 +296,16 @@
             let immunizationEntries = fhirBundle.entry.slice(1);
             let immunizations = immunizationEntries.map(function (ie) {
                 return {
-                    'code': ie.resource.vaccineCode.coding[0].code,
-                    'lot': ie.resource.lotNumber,
-                    'date': ie.resource.occurrenceDateTime
+                    "code": ie.resource.vaccineCode.coding[0].code,
+                    "lot": ie.resource.lotNumber,
+                    "date": ie.resource.occurrenceDateTime
                 };
             });
             return {
                 issuer: immunizationEntries[0].resource.performer[0].actor.display,
                 patientData: {
                     firstName: (patientEntry.resource.name[0].given instanceof Array)
-                        ? patientEntry.resource.name[0].given.join(' ')
+                        ? patientEntry.resource.name[0].given.join(" ")
                         : patientEntry.resource.name[0].given,
                     lastName: patientEntry.resource.name[0].family,
                     dob: patientEntry.resource.birthDate,
@@ -329,7 +328,7 @@
 
         // Clears all the fields including errors
         // The section.clear() calls chain so we only need to call the top-most clear()
-        document.getElementById('buttonClear').onclick = () => {
+        document.getElementById("buttonClear").onclick = () => {
             secScanQr.clear();
         };
 
