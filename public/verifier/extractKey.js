@@ -18,10 +18,19 @@ const secExtractPublicKey = (() => {
             return;
         }
 
-        document.getElementById('summaryIss').value = jwsPayload.iss;
+        const issuer = jwsPayload.iss;
+        //  URL for the VCI issuers list from https://github.com/the-commons-project/vci-directory
+        const publicIssuers = 'https://raw.githubusercontent.com/the-commons-project/vci-directory/main/vci-issuers.json'
+        const downloadUrl = 'download-public-key';
+        let result = await restCall(downloadUrl, { keyUrl: publicIssuers }, 'POST');
+        let issuersList = result.keySet.participating_issuers;
+        let issuerObject = issuersList.find(ele => ele.iss === issuer);
+
+        if (!issuerObject) issuerObject = { name: "UNVERIFIED" };
+        document.getElementById('summaryIss').value = `<b>${issuerObject.name}</b>, <a href="${issuer + '/.well-known/jwks.json'}">${issuer}</a>`;
         window.validateCode('summaryIss');
 
-        await sec.setValue(jwsPayload.iss + '/.well-known/jwks.json');
+        await sec.setValue(issuer + '/.well-known/jwks.json');
     };
 
     sec.validate = async function (field) {

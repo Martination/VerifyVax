@@ -57,14 +57,12 @@
             <h1 class="text-primary display-4">
                 <i class="bi bi-upc-scan"></i> Verifier Portal
             </h1>
-            <p>
-                The Verifier Portal takes as input, a QR-Code image of a SMART Health Card.
-            </p>
+            <p> The Verifier Portal takes as input a QR Code image of a SMART Health Card. </p>
 
             <hr>
             <div id="summary">
                 <div class="fs-5"><span id="summaryWorking"></span>&nbsp;</div>
-                <div>Verified real? <span class="fw-bold fst-italic" id="summaryVerify"></span></div>
+                <div>Verified real? <span class="fw-bold" id="summaryVerify"></span></div>
                 <div>Issued by: <span id="summaryIss"></span></div><br />
                 <div>Personal Details <span id="summaryDetails"></span></div>
             </div>
@@ -269,10 +267,10 @@
 
                     let immunizations = ""
                     patientData.immunizations.forEach(function (vaccine, index, arr) {
-                        immunizations += `<br>Shot ${index + 1}, Date: ${vaccine.date}, Code: ${codeToVaccine(vaccine.code)} ${vaccine.code}`;
+                        immunizations += `<br>Shot ${index + 1} – Date: ${vaccine.date}, Code: ${codeToVaccine(vaccine.code)} ${vaccine.code}`;
                     });
 
-                    let formattedString = `<br>Name: ${name}, DOB: ${dob}, ${immunizations} <br>From: ${issuer}`;
+                    let formattedString = `<br>Name: ${name}, DOB: ${dob}, ${immunizations} <br>From ${issuer}`;
 
                     element.innerHTML = formattedString;
 
