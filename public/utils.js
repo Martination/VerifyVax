@@ -54,7 +54,7 @@ function decodeBase64Url(base64Encoded) {
     // pad to make valid Base64
     if (b64.length % 4 === 1) b64 += 'A';
     while (b64.length % 4 !== 0) {
-        b64 += '='
+        b64 += '=';
     }
 
     const decoded = atob(b64)

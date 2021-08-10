@@ -20,7 +20,7 @@ const secExtractPublicKey = (() => {
 
         const issuer = jwsPayload.iss;
         //  URL for the VCI issuers list from https://github.com/the-commons-project/vci-directory
-        const publicIssuers = 'https://raw.githubusercontent.com/the-commons-project/vci-directory/main/vci-issuers.json'
+        const publicIssuers = 'https://raw.githubusercontent.com/the-commons-project/vci-directory/main/vci-issuers.json';
         const downloadUrl = 'download-public-key';
         let result = await restCall(downloadUrl, { keyUrl: publicIssuers }, 'POST');
         let issuersList = result.keySet.participating_issuers;

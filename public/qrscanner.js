@@ -80,6 +80,6 @@ const QrScanner = function (vidId) {
     return {
         scan: scan,
         stop: stop
-    }
+    };
 
 }

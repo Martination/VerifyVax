@@ -89,10 +89,10 @@
                 <span class="d-none d-md-block">Paste QR Code</span>
             </button>
         </div>
-        <div id="scanQr" class="section pb-4"></div>
+        <div id="scanQr"></div>
         <script src="verifier/qr.js"></script>
 
-        <div class="py-2">
+        <div>
             <button class="btn btn-light btn-lg mb-4" data-bs-target="#collapseTarget" data-bs-toggle="collapse">
                 Extra Details
             </button>
@@ -102,32 +102,32 @@
                 <p>Each step in the process does some amount of validation. Subsequent steps may not
                     succeed without successful processing of the previous step.</p>
 
-                <div id="decodeNumeric" class="section pb-4"></div>
+                <div id="decodeNumeric"></div>
                 <script src="verifier/numeric.js"></script>
                 <script>secScanQr.next = secDecodeNumeric</script>
 
 
-                <div id="decodeJWS" class="section pb-4"></div>
+                <div id="decodeJWS"></div>
                 <script src="verifier/jws.js"></script>
                 <script>secDecodeNumeric.next = secDecodeJWS;</script>
 
 
-                <div id="extractPublicKey" class="section pb-4"></div>
+                <div id="extractPublicKey"></div>
                 <script src="verifier/extractKey.js"></script>
                 <script>secDecodeJWS.next = secExtractPublicKey;</script>
 
 
-                <div id="downloadKey" class="section pb-4"></div>
+                <div id="downloadKey"></div>
                 <script src="verifier/downloadKey.js"></script>
                 <script>secExtractPublicKey.next = secDownloadKey;</script>
 
 
-                <div id="verifySignature" class="section pb-4"></div>
+                <div id="verifySignature"></div>
                 <script src="verifier/signature.js"></script>
                 <script>secDownloadKey.next = secVerifySignature</script>
 
 
-                <div id="extractFhirBundle" class="section pb-4"></div>
+                <div id="extractFhirBundle"></div>
                 <script src="verifier/fhir.js"></script>
                 <script>secVerifySignature.next = secExtractFhirBundle;</script>
 
@@ -159,7 +159,7 @@
 
 
     <script>
-        feather.replace()
+        feather.replace();
 
         // Scanner
         const qrModalEl = document.getElementById("qrModal");
@@ -187,7 +187,6 @@
             copyText.focus();
             copyText.setSelectionRange(0, 99999, "backward");
             if (document.execCommand("copy")) {
-                // copyText.blur();
                 copyText.scrollTo(0, 0);    // Doesn't work in Firefox?
 
                 copyButton.dispatchEvent(new Event("updated"));

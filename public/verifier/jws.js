@@ -32,7 +32,7 @@ const secDecodeJWS = (() => {
     sec.validate = async function (field) {
 
         const text = field.value;
-        if (!text) { this.clearErrors(field.index); this.next?.clear(); return }
+        if (!text) { this.clearErrors(field.index); this.next?.clear(); return; }
 
         switch (field.index) {
             case 0: // header

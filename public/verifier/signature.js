@@ -13,7 +13,7 @@ const secVerifySignature = (() => {
         let signature = secDecodeJWS.getValue(2 /*signature*/);
         if (!signature) return;
 
-        if (!secDecodeJWS.fields[2].valid()) return sec.setErrors(["JWS/Signature not valid"]);;
+        if (!secDecodeJWS.fields[2].valid()) return sec.setErrors(["JWS/Signature not valid"]);
 
         data.pop(); // removes the signature segment leaving header.payload
         data = data.join('.');
@@ -34,7 +34,7 @@ const secVerifySignature = (() => {
                     return window.crypto.subtle.verify({ name: "ECDSA", hash: { name: "SHA-256" } }, publicKey, signature, data);
                 },
                 function (err) { /* catch */
-                    sec.setErrors([`Error importing key. name:'${err.name}' message:'${err.message}' code:'${err.code}'`])
+                    sec.setErrors([`Error importing key. name:'${err.name}' message:'${err.message}' code:'${err.code}'`]);
                     return Promise.reject(null);
                 }
             )
@@ -49,7 +49,7 @@ const secVerifySignature = (() => {
                 },
                 function (err) { /* catch */
                     if (err === null) return; /* error already handled */
-                    sec.setErrors([`Error verifying signature. name:'${err.name}' message:'${err.message}' code:'${err.code}'`])
+                    sec.setErrors([`Error verifying signature. name:'${err.name}' message:'${err.message}' code:'${err.code}'`]);
                 }
             );
 
@@ -64,7 +64,7 @@ const secVerifySignature = (() => {
     function selectKey() {
 
         let keySet = secDownloadKey.getValue();
-        keySet = tryParse(keySet)
+        keySet = tryParse(keySet);
 
         if (!keySet) {
             sec.clear();

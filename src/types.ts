@@ -45,7 +45,7 @@ interface ValidationResult {
     // encoded FHIR bundle
     fhirBundle?: string;
     // an error message, on failure
-    error?: string
+    error?: string;
 }
 
 interface FhirBundle {
@@ -54,9 +54,9 @@ interface FhirBundle {
     CodeableConcept: { text: unknown };
     meta: unknown;
     id: unknown;
-    "resourceType": string,
-    "type": string,
-    "entry": BundleEntry[]
+    "resourceType": string;
+    "type": string;
+    "entry": BundleEntry[];
 }
 
 type Resource = { resourceType: string } & Record<string, unknown>;

@@ -15,7 +15,7 @@ class Field {
     name;
     errors = [];
     height = { min: 60, max: 400 };
-    options = { color: { default: "#FFF", update: '#d6fcd7' }, delay: { update: 100, bounce: 100 } };
+    options = { color: { default: "#FFF", update: "#d6fcd7" }, delay: { update: 100, bounce: 100 } };
 
     constructor(section, name, placeholder) {
 
@@ -29,11 +29,11 @@ class Field {
 
         let timer;
 
-        this.textArea.addEventListener('input', () => {
+        this.textArea.addEventListener("input", () => {
 
             console.log("Input changed");
-            document.getElementById('summaryWorking').value = "Processing";
-            window.validateCode('summaryWorking');
+            document.getElementById("summaryWorking").value = "Processing";
+            window.validateCode("summaryWorking");
 
             // this will prevent typing from triggering a server round-trip for every key-stroke
             if (timer) clearTimeout(timer);
@@ -49,8 +49,8 @@ class Field {
 
         // Special handling if field is made empty
         // remove errors and clear the remaining sections
-        if (this.textArea.value.trim() === '') {
-            this.textArea.value = '';
+        if (this.textArea.value.trim() === "") {
+            this.textArea.value = "";
             this.section.fields.length > 1 ?
                 this.section.clearErrors(this.index) :
                 this.section.clearErrors()
@@ -75,8 +75,8 @@ class Field {
     }
 
     set value(text) {
-        this.textArea.value = text || '';
-        if (this.textArea === '') this.errors = [];
+        this.textArea.value = text || "";
+        if (this.textArea === "") this.errors = [];
         this.textArea.style.background = this.options.color.update;
         setTimeout(() => {
             this.textArea.style.background = this.options.color.default;
@@ -124,7 +124,7 @@ class Section {
 
         // <div class="section">
         const sectionDiv = document.getElementById(id);
-        sectionDiv.className = "section";
+        sectionDiv.className = "section pb-4";
 
         if (buttonText) {
             // <input type="button" ...
@@ -152,16 +152,16 @@ class Section {
         docsDiv.className = "content mb-2";
         sectionDiv.appendChild(docsDiv);
 
-        var markdownLeftDiv = document.createElement('DIV');
+        var markdownLeftDiv = document.createElement("DIV");
         markdownLeftDiv.style = "width: 50%;padding-right: 5px;";
         docsDiv.appendChild(markdownLeftDiv);
 
-        this.docLeft = document.createElement('article');
+        this.docLeft = document.createElement("article");
         this.docLeft.className = "markdown-body";
         this.docLeft.innerHTML = "docHtml";
         markdownLeftDiv.appendChild(this.docLeft);
 
-        var markdownRightDiv = document.createElement('div');
+        var markdownRightDiv = document.createElement("DIV");
         markdownRightDiv.style = "flex-grow: 1;padding-left: 5px;";
         docsDiv.appendChild(markdownRightDiv);
 
@@ -208,7 +208,7 @@ class Section {
 
         // convert strings to error objects
         for (let i = 0; i < errors.length; i++) {
-            if (typeof (errors[i]) === 'string') {
+            if (typeof (errors[i]) === "string") {
                 errors[i] = { message: errors[i], code: 100, level: 3 };
             }
         }
@@ -266,15 +266,15 @@ class Section {
             return;
         }
 
-        element.value = allErrors.join('\n');
-        element.style.background = errors ? '#e097a2' : '#f7ca6b';
+        element.value = allErrors.join("\n");
+        element.style.background = errors ? "#e097a2" : "#f7ca6b";
 
 
         // expand the error TA and parent DIV elements
         element.style.height = "1px";
-        element.style.maxHeight = height.max + 'px';
-        element.style.height = Math.max(element.scrollHeight, height.min) + 5 + 'px';
-        element.parentElement.style.maxHeight = 'max-content';
+        element.style.maxHeight = height.max + "px";
+        element.style.height = Math.max(element.scrollHeight, height.min) + 5 + "px";
+        element.parentElement.style.maxHeight = "max-content";
     }
 
 
@@ -297,7 +297,7 @@ class Section {
         if (markdownRight && markdownRight.trim().length) {
 
             if (this.docRight == null) {
-                this.docRight = document.createElement('article');
+                this.docRight = document.createElement("article");
                 this.docRight.className = "markdown-body";
                 this.docLeft.parentElement.nextElementSibling.appendChild(this.docRight);
             }
