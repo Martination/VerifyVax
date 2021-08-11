@@ -53,7 +53,7 @@ class Field {
             this.textArea.value = "";
             this.section.fields.length > 1 ?
                 this.section.clearErrors(this.index) :
-                this.section.clearErrors()
+                this.section.clearErrors();
             this.section.next?.clear();
             return;
         }
