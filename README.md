@@ -22,7 +22,7 @@ The holder, in this case, is the individual presenting their own information for
 
 ## Try it out
 
-<https://verifyvax.herokuapp.com/>
+<https://verify-vax.up.railway.app/>
 
 This website is a major update to the demo [verifier portal](https://demo-portals.smarthealth.cards/VerifierPortal.html) which is available open source from the [SMART on FHIR](https://github.com/smart-on-fhir/health-cards-tests/tree/master/demo-portals) Github, using the MIT License Copyright by the Computational Health Informatics Program, Boston Children's Hospital, Boston, MA.
 
