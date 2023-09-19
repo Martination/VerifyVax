@@ -8,7 +8,7 @@ An easy to use website that can scan QR codes using the [SMART Health Card Frame
 
 This project satisfies the _verifier_ (or _venue_) piece of the model. This allows venues to verify the integrity and accuracy of presented QR codes, a service that at the time of creation is generally unavailable to venues wishing to check vaccination records of patrons.
 
-(***UPDATE:*** The Commons Project has released a public [Verifier app](https://thecommonsproject.org/smart-health-card-verifier) that effectively replaces this website. I will leave this up and running for the time being though in case anyone doesn't want to download an app or wants to wait for further development on that app before using it.)
+(_**UPDATE:**_ The Commons Project has released a public [Verifier app](https://thecommonsproject.org/smart-health-card-verifier) that effectively replaces this website. I will leave this up and running for the time being though in case anyone doesn't want to download an app or wants to wait for further development on that app before using it.)
 
 ![Conceptual Model](model.png)
 
@@ -22,7 +22,8 @@ The holder, in this case, is the individual presenting their own information for
 
 ## Try it out
 
-<https://verify-vax.up.railway.app/>
+<https://martination.github.io/VerifyVax/>
+<!-- <https://verify-vax.up.railway.app/> -->
 
 This website is a major update to the demo [verifier portal](https://demo-portals.smarthealth.cards/VerifierPortal.html) which is available open source from the [SMART on FHIR](https://github.com/smart-on-fhir/health-cards-tests/tree/master/demo-portals) Github, using the MIT License Copyright by the Computational Health Informatics Program, Boston Children's Hospital, Boston, MA.
 
