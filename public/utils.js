@@ -6,6 +6,10 @@ async function restCall(url, data, method = 'POST', responseType = 'json') {
 
     return new Promise(function (resolve, reject) {
 
+        const AWS_SERVER = 'https://kvv33j707a.execute-api.us-east-1.amazonaws.com';
+        // const AWS_SERVER = 'http://localhost:8080';
+        url = AWS_SERVER + url;
+
         xhr.open(method, url);
 
         if (data instanceof Object) {
