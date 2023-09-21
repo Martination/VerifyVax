@@ -41,6 +41,7 @@ bower_components
 build/Release
 
 # Dependency directories
+package-lock.json
 node_modules/
 jspm_packages/
 
@@ -130,10 +131,9 @@ cards/*
 js/*
 
 # qr-scanner js files to enable in-browser qr scanning
-# showdown js files to markdown to html
 # github-markdown css files format markdown in a github style
-public/jsQR.js
-public/github-markdown*
+# public/jsQR.js
+# public/github-markdown*
 
 # localhost tls cert and key generated at install
 public/localhost.crt
