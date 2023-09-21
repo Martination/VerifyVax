@@ -1,0 +1,16 @@
+org: martingreen
+app: verify-vax
+service: verify-vax
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+
+plugins: ['serverless-esbuild', 'serverless-offline']
+
+functions:
+  api:
+    handler: src/server.handler
+    events:
+      - httpApi: '*'

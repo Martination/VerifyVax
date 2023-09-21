@@ -21,7 +21,6 @@
 
     <link rel="shortcut icon" href="favicon/favicon.ico">
     <link rel="icon" type="image/png" href="favicon/favicon.png">
-    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -31,6 +30,7 @@
 
     <script src="jsQR.js"></script>
     <script src="qrscanner.js"></script>
+    <script src="ExampleData.js"></script>
 
 </head>
 
@@ -56,6 +56,12 @@
                 <i class="bi bi-upc-scan"></i> Verify Vax
             </h1>
             <p>This portal takes as input a QR Code image of a SMART Health Card to verify its authenticity.</p>
+            <p>To view examples of QR codes and numeric data, visit the <a href="https://spec.smarthealth.cards/examples/" target="_blank">Smart Health Cards
+                    Examples page</a>. Copy and paste the <code>qr-code-numeric-value</code> example text files into the box below, or alternatively you can
+                autofill some example data.</p>
+            <div class="text-left">
+                <input type="button" class="btn btn-secondary btn-lg" id="buttonAutofill" value="Autofill" />
+            </div>
 
             <hr>
             <div id="summary">
@@ -312,11 +318,16 @@
                 case "207": return "Moderna";           // 12+ years old
                 case "221": return "Moderna Booster";   // 6-12 year old or booster
                 case "228": return "Moderna Baby";      // 6 months - 6 years old
+                case "229": return "Moderna Bivalent";  // 12+ years old
+                case "230": return "Moderna Baby Bivalent"; // 6 months - 5 years old
 
                 case "208": return "Pfizer";            // Original 12+ yr
                 case "217": return "Pfizer";            // 12+ yr
                 case "218": return "Pfizer Child";      // 5-12 yr old
                 case "219": return "Pfizer Baby";       // 6mo - 4yr
+                case "300": return "Pfizer Bivalent";   // 12+ yr
+                case "301": return "Pfizer Bivalent";   // 5-11 yr old
+                case "302": return "Pfizer Baby Bivalent"; // 6mo - 4yr
 
                 case "210": return "AstraZeneca";       // 18+ yr
                 case "211": return "Novavax";           // 18+ yr
@@ -334,6 +345,17 @@
         document.getElementById("buttonClear").onclick = () => {
             secScanQr.clear();
         };
+
+        // Autofill example data from the ExampleData.js file
+        document.getElementById("buttonAutofill").onclick = () => {
+
+            let pasteText = document.querySelector("#scanQr textarea");
+            pasteText.focus();
+
+            pasteText.innerHTML = qrCodeExampleData;
+            pasteText.value = qrCodeExampleData;
+            pasteText.dispatchEvent(new Event("input"));
+        }
 
         // User selected profile for FHIR validation
         function profileSelected(event) {

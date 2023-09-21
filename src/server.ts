@@ -10,9 +10,12 @@ import { validate, ValidationProfiles } from 'health-cards-validation-sdk/js/src
 import * as issuer from './issuer';
 
 
+const serverless = require("serverless-http");
+const cors = require('cors');
 const app = express();
 app.use(express.json()); // for parsing application/json
 app.use(express.static('./public')); // issuer public key set
+app.use(cors());
 
 
 validate.profile = ValidationProfiles.any;
@@ -96,3 +99,5 @@ http.createServer(app).listen(Config.SERVICE_PORT, () => {
     const url = Config.SERVER_BASE;
     console.log("Service listening at " + url);
 });
+
+module.exports.handler = serverless(app);

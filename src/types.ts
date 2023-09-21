@@ -26,7 +26,7 @@ interface HealthCardPatientData {
     firstName: string;
     // patient last name
     lastName: string;
-    // date of birht
+    // date of birth
     dob: string;
     // patient completed immunizations
     immunizations: Immunization[];
